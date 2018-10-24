@@ -6,10 +6,11 @@ class Transaction (Printable):
   def verify_transactions(transactions, get_balance):
     return all([tx.verify(get_balance) for tx in transactions])
 
-  def __init__(self, sender, recipient, amount):
+  def __init__(self, sender, recipient, amount, signature):
     self.sender = sender
     self.recipient = recipient
     self.amount = amount
+    self.signature = signature
 
   def __repr__(self):
     return repr(self.__dict__)

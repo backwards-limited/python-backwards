@@ -26,7 +26,7 @@ class Blockchain:
     try:
       with open(Blockchain.file_name, mode = "r") as file:
         def parse_transaction(transaction):
-          return Transaction(transaction["sender"], transaction["recipient"], transaction["amount"])
+          return Transaction(transaction["sender"], transaction["recipient"], transaction["amount"], transaction["signature"])
 
         def load_blockchain(loaded_blockchain):
           if len(loaded_blockchain) > 0:
@@ -71,7 +71,7 @@ class Blockchain:
     else:
       return self.chain[-1]
 
-  def add_transaction(self, sender, recipient, amount):
+  def add_transaction(self, sender, recipient, amount, signature):
     """ 
     Append a new transaction to list of open transactions
 
@@ -79,18 +79,15 @@ class Blockchain:
       :sender: The sender of the coins
       :recipient: The recipient of the coins
       :amount: The amount of coins sent with the transaction
+      :signature: All given data signed
     """
     if self.id == None:
       return False
 
-    transaction = Transaction(sender, recipient, amount)
+    transaction = Transaction(sender, recipient, amount, signature)
 
     if transaction.verify(self.get_balance):
       self.open_transactions.append(transaction)
-
-      # participants.add(sender)
-      # participants.add(recipient)
-
       self.save_data()
 
       return True
@@ -126,7 +123,7 @@ class Blockchain:
     last_block = self.chain[-1]
     hashed_block = last_block.hash()
 
-    reward_transaction = Transaction(sender = "MINING", recipient = self.id, amount = self.mining_reward)
+    reward_transaction = Transaction(sender = "MINING", recipient = self.id, amount = self.mining_reward, signature = "")
 
     copied_transactions = self.open_transactions[:]
     copied_transactions.append(reward_transaction)
