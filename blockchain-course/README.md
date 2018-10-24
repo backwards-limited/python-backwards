@@ -6,7 +6,7 @@ A Blockchain Cryptocurrency developed in Python upon following the excellent cou
 
 Apologies I shall only cover **Mac** - One day I may include Linux and Windows.
 
-Initially follow the [parent README](../README.md) to this one. It is quite long but get your Python into the right place, so to speak.
+Initially follow the [parent setup](../docs/setup.md) to this one. It is quite long but get your Python into the right place, so to speak.
 
 Ok! So I trust you have Python all setup... just how we need it i.e. did you really follow the [parent README](../README.md)?
 
@@ -17,6 +17,7 @@ pip install pycrypto
 ```
 
 But since we now have **Anaconda** installed, let's use the **Navigator** to install within a virtual environment pertaining to our module. So boot the Navigator:
+
 ```bash
 anaconda-navigator
 ```
@@ -66,6 +67,8 @@ source activate pycoin
 After all that, I just went **global** to avoid this very odd and laborious way of achieving something so simple in other languages. Shame, because I like Python, but come on!
 
 ## Run
+
+Within **src** directory:
 
 ```bash
 python node.py
