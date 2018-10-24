@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bb7f024d-70b9-4021-9a38-14399de5ae52" name="Default Changelist" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/python_blockchain$blockchain.coverage" NAME="blockchain Coverage Results" MODIFIED="1537907924947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/python_blockchain$node.coverage" NAME="node Coverage Results" MODIFIED="1539356779352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1593990981">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.2" value="3" />
+          <entry key="project.open.time.20" value="1" />
+          <entry key="project.opened" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="5" />
+          <entry key="txt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.vcs.git.usages" />
+      <usages-collector id="statistics.spring.boot.run.usages" />
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="132" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.spring.boot.mvc.usages" />
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="132" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/blockchain.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="58" column="21" lean-forward="true" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/block.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="427">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/node.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="501">
+              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/blockchain.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../../kafka/kafka-lab" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/blockchain.py" />
+        <option value="$PROJECT_DIR$/src/blockchain.txt" />
+        <option value="$PROJECT_DIR$/src/node.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="23" />
+    <option name="width" value="1680" />
+    <option name="height" value="1027" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="python-blockchain" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python-blockchain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python-blockchain" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python-blockchain" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539355977860" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="$USER_HOME$/.nvm/versions/node/v4.2.2/bin/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.scala.compiler.ScalaCompileServerForm" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.node">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="blockchain" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python-blockchain" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/blockchain.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="node" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python-blockchain" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/node.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Python.blockchain" />
+      <item itemvalue="Python.node" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.node" />
+        <item itemvalue="Python.blockchain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="modificationStamps">
+      <map>
+        <entry key="$USER_HOME$/Books/Scala/Functional and Reactive Domain Modeling/frdomain-master" value="1471863660000" />
+        <entry key="$USER_HOME$/Desktop/temp/registered-traveller-caseworker-2.4.7-3401/caseworker" value="1466750516000" />
+        <entry key="$USER_HOME$/Desktop/temp/rtp-caseworker-domain-lib" value="1462953400000" />
+        <entry key="$USER_HOME$/backup/play-knockout" value="5817458728000" />
+        <entry key="$USER_HOME$/git/home-office/drt-passenger-splits" value="1488294951000" />
+        <entry key="$USER_HOME$/git/home-office/drt-scalajs-spa-exploration" value="2977101647000" />
+        <entry key="$USER_HOME$/git/home-office/evw-caseworker/caseworker" value="2933108513000" />
+        <entry key="$USER_HOME$/git/home-office/evw-domain-lib" value="1474537469000" />
+        <entry key="$USER_HOME$/git/home-office/evw-integration-service" value="4407664265000" />
+        <entry key="$USER_HOME$/git/home-office/flight-forecast-service" value="1474630009000" />
+        <entry key="$USER_HOME$/git/home-office/ge-schemas" value="1458239251000" />
+        <entry key="$USER_HOME$/git/home-office/ges-proxy-service" value="1474471519000" />
+        <entry key="$USER_HOME$/git/home-office/global-entry-integration-service" value="1472570342000" />
+        <entry key="$USER_HOME$/git/home-office/global-entry-reconciliation" value="5827004896000" />
+        <entry key="$USER_HOME$/git/home-office/mercury" value="1484046154000" />
+        <entry key="$USER_HOME$/git/home-office/passport-ocr-service" value="1475242933000" />
+        <entry key="$USER_HOME$/git/home-office/registered-traveller-caseworker-amendments" value="1468847886000" />
+        <entry key="$USER_HOME$/git/home-office/registered-traveller-caseworker/caseworker" value="1472657596000" />
+        <entry key="$USER_HOME$/git/home-office/registered-traveller-integration-service" value="1475745753000" />
+        <entry key="$USER_HOME$/git/home-office/rt-emailer" value="1456227959000" />
+        <entry key="$USER_HOME$/git/home-office/rt-schemas" value="4356162152000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-akka-lib" value="1472744260000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-amazon-sqs-lib" value="1477393603000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-aws-lib" value="1483970916000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-caseworker-domain-lib" value="1476090712000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-caseworker-mongo-lib" value="1474907767000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-email-lib" value="1472734547000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-functional-testing" value="18863768860000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-io-lib" value="1480773855000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-kafka-lib" value="1459421678000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-mongo-lib" value="1474631418000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-proxy-lib" value="1476774615000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-rabbit-lib" value="1475250703000" />
+        <entry key="$USER_HOME$/git/home-office/rtp-test-lib" value="1473687977000" />
+        <entry key="$USER_HOME$/git/play-knockout" value="1454170218000" />
+        <entry key="$USER_HOME$/git/play-modular-multiproject" value="2915035481000" />
+        <entry key="$USER_HOME$/git/play-mongo-knockout" value="1454169596000" />
+        <entry key="$PROJECT_DIR$/../../activator/akka-clustering" value="1463612521000" />
+        <entry key="$PROJECT_DIR$/../../activator/akka-distributed-workers" value="1463143375000" />
+        <entry key="$PROJECT_DIR$/../../activator/clustered-chat" value="1458517292000" />
+        <entry key="$PROJECT_DIR$/../../activator/hello-kafka" value="1459501051000" />
+        <entry key="$PROJECT_DIR$/../../activator/hello-slick-3.0" value="1478818803000" />
+        <entry key="$PROJECT_DIR$/../../activator/macwire-activator" value="1462442889000" />
+        <entry key="$PROJECT_DIR$/../../activator/macwire-akka-activator" value="1462443064000" />
+        <entry key="$PROJECT_DIR$/../../activator/play-akka-cluster-sample" value="1458426875000" />
+        <entry key="$PROJECT_DIR$/../../activator/play-angular2-typescript" value="1464353410000" />
+        <entry key="$PROJECT_DIR$/../../activator/play-macwire" value="1462442569000" />
+        <entry key="$PROJECT_DIR$/../../activator/play-monad-transformers" value="1480612548000" />
+        <entry key="$PROJECT_DIR$/../../activator/play-reactive-mongo-db" value="1462362419000" />
+        <entry key="$PROJECT_DIR$/../../activator/play-reactivemongo-polymer" value="1462363204000" />
+        <entry key="$PROJECT_DIR$/../../activator/reactive-kafka-scala" value="1459509388000" />
+        <entry key="$PROJECT_DIR$/../../activator/scala-template" value="1459761427000" />
+        <entry key="$PROJECT_DIR$/../../activator/scalajs" value="1480508429000" />
+        <entry key="$PROJECT_DIR$/../../bitbucket/aws-scala" value="16315116730000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/accumulate" value="1483798512000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/all-your-base" value="1485642045000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/allergies" value="1484517755000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/anagram" value="1475942617000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/atbash-cipher" value="1485562655000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/bank-account" value="1485726204000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/bob" value="1475789021000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/crypto-square" value="1486418231000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/difference-of-squares" value="1483746220000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/etl" value="1477149964000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/gigasecond" value="1483743688000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/grade-school" value="1476013281000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/grains" value="1483651507000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/hamming" value="1475869485000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/hello-world" value="1475784421000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/kindergarten-garden" value="1486829905000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/leap" value="1476038063000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/meetup" value="1477151665000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/nucleotide-count" value="1475959242000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/pangram" value="1475941335000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/phone-number" value="1476006962000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/prime-factors" value="1484421036000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/raindrops" value="1484432704000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/rna-transcription" value="1483833906000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/robot-name" value="1476031099000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/robot-simulator" value="1483576151000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/roman-numerals" value="1476133270000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/scrabble-score" value="1483744884000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/space-age" value="1477229316000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/sublist" value="1483819011000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/triangle" value="1484414421000" />
+        <entry key="$PROJECT_DIR$/../../exercism/scala/word-count" value="1475875384000" />
+        <entry key="$PROJECT_DIR$/../../github/akkahttp-playground" value="1486983832000" />
+        <entry key="$PROJECT_DIR$/../../github/cluster-console" value="1464256678000" />
+        <entry key="$PROJECT_DIR$/../../github/commons-aws" value="1483189147000" />
+        <entry key="$PROJECT_DIR$/../../github/dynamodb-scala" value="1478818832000" />
+        <entry key="$PROJECT_DIR$/../../github/scalatest-embedded-kafka" value="1463127326000" />
+        <entry key="$PROJECT_DIR$/../../grid" value="1482514167000" />
+        <entry key="$PROJECT_DIR$/../../home-office/akka-ho-lib" value="1484301038000" />
+        <entry key="$PROJECT_DIR$/../../home-office/akka-lib" value="1484303536000" />
+        <entry key="$PROJECT_DIR$/../../home-office/akka-scala-lib" value="1484322739000" />
+        <entry key="$PROJECT_DIR$/../../home-office/aws-scala-lib" value="1484305022000" />
+        <entry key="$PROJECT_DIR$/../../home-office/io-scala-lib" value="1480930030000" />
+        <entry key="$PROJECT_DIR$/../../home-office/te-api" value="1461247450000" />
+        <entry key="$PROJECT_DIR$/../../home-office/test-scala-lib" value="1473687977000" />
+        <entry key="$PROJECT_DIR$/../../jobs/fizzbuzz-scala" value="1481496541000" />
+        <entry key="$PROJECT_DIR$/../../jobs/shopping-cart" value="1481579280000" />
+        <entry key="$PROJECT_DIR$/../../jobs/shopping-cart-scala" value="1481579454000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/catergory-theory" value="1487421198000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/elasticmq" value="1458646843000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/kafka-kissthinker" value="1459421678000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/play-mustache" value="2914863341000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/play-mustache-lib" value="1457426894000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/scala-blog" value="1467823671000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/scala-blog-example" value="1468311982000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/scala-blog-introduction" value="1468233340000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/scala-blog-uk-home-office" value="1468182565000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/scala-kissthinker" value="1473976581000" />
+        <entry key="$PROJECT_DIR$/../../kissthinker/specs2-kissthinker" value="1460543348000" />
+        <entry key="$PROJECT_DIR$/../../learning/fs2-playground" value="1488916446000" />
+        <entry key="$PROJECT_DIR$/../../practice/email" value="1482772373000" />
+        <entry key="$PROJECT_DIR$/../../practice/experiment" value="1484344344000" />
+        <entry key="$PROJECT_DIR$/../../practice/fizzbuzz" value="1481394395000" />
+        <entry key="$PROJECT_DIR$/../../practice/shopping-cart" value="1481459262000" />
+        <entry key="$PROJECT_DIR$/../../scala-presentation" value="1454494242000" />
+        <entry key="$PROJECT_DIR$/../../scalajs/workbench-example-app" value="2962246986000" />
+        <entry key="$PROJECT_DIR$/../../voa-test" value="1454370042000" />
+      </map>
+    </option>
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/Downloads/finch-server" value="PREVIEW" />
+        <entry key="$USER_HOME$/backup/platform" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../ProvingGround" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../avro/scala-kafka-avro-tutorial" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../aws/temp/sam-seed" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../aws/temp/sbt-aws-lambda" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../aws/temp/scala-aws-lambda-seed" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../backwards/backwards" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../backwards/kafka-backwards" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../backwards/streaming-backwards" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../bitbucket/fabio-parallelai" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../Project-Bifrost" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../hello-bitcoin" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../rchain" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../books/functional-data-structures-and-algorithms" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../books/functional-programming-in-scala" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../cats/cats" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../cats/cats-effect" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../esp/api-iov42" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../github/learn-fp" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../github/pureWebappSample" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../github/sbt-release" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../github/sttp" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../github/tagless-final-jam-2018" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../http4s/rho" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../http4s/scala-pet-store" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../iov42/api-gateway" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../iov42/cbs-backend" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../iov42/iov42" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../iov42/platform" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../iov42/sc-tutorial" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../iov42/scala-middleware-wallet" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../iov42/transactor" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../kafka/kafka-backwards" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../kafka/kafka-lab-scala" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../kafka/kafka-playground" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../kafka/kafka-serialization" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../kubernetes/akkahttp-playground" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot-api" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot-api-common" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot-licence" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot-licence-server" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_api_client" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_api_server" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_common" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_common_persist" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_common_secure" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_common_types" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_containers" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_executor_api" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/sot_gcp" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../parallelai/temp/sot_executor_api" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../playground/kubernetes-playground" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../sbt/microsites/sbt-microsites" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../sbt/site/sbt-site" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../scala/Scorex" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../scala/pureWebappSample" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../shapeless/automatic-type-class-derivation-part-one" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../shapeless/automatic-type-class-derivation-part-three" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../shapeless/automatic-type-class-derivation-part-two" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../testing/cornichon" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bb7f024d-70b9-4021-9a38-14399de5ae52" name="Default Changelist" comment="" />
+      <created>1537906654122</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1537906654122</updated>
+      <workItem from="1537906655988" duration="2117000" />
+      <workItem from="1537955880179" duration="96000" />
+      <workItem from="1539081317373" duration="150000" />
+      <workItem from="1539355069433" duration="1743000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="4106000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="2048" height="1129" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49854228" visible="true" weight="0.23379861" />
+      <window_info id="Structure" order="1" sideWeight="0.50145775" weight="0.24973376" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.38499507" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Websocket Client" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" />
+      <window_info anchor="bottom" id="Graph Database Console" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Reviews" order="14" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Jenkins" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Graph Database" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="News Feed" order="9" />
+      <window_info anchor="right" id="SciView" order="10" />
+      <window_info anchor="right" id="Database" order="11" />
+      <window_info anchor="right" id="Palette&#9;" order="12" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/blockchain.py" />
+    <entry file="file://$PROJECT_DIR$/src/block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/blockchain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="58" column="21" lean-forward="true" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transaction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/blockchain.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/node.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>scala-sdk-2.11.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
