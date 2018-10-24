@@ -56,7 +56,7 @@ class Node:
 
       elif user_choice == "2":
         if not self.blockchain.mine_block():
-          print("Mining failed - Check you have a valid wallet?")
+          print("Mining failed - Have you been hacked?")
 
       elif user_choice == "3":
         self.print_blockchain_elements()
@@ -81,7 +81,7 @@ class Node:
       elif user_choice == "h":
         if len(self.blockchain.chain) >= 1:
           hackedBlock = Block.genesis_block()
-          hackedBlock.transactions = [Transaction(sender = "hacker1", recipient = "hacker2", amount = 100)]
+          hackedBlock.transactions = [Transaction(sender = "hacker1", recipient = "hacker2", amount = 100, signature = "hacked")]
 
           self.blockchain.chain[0] = hackedBlock
 

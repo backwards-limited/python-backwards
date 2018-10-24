@@ -8,7 +8,7 @@ Apologies I shall only cover **Mac** - One day I may include Linux and Windows.
 
 Initially follow the [parent setup](../docs/setup.md) to this one. It is quite long but get your Python into the right place, so to speak.
 
-Ok! So I trust you have Python all setup... just how we need it i.e. did you really follow the [parent README](../README.md)?
+Ok! So I trust you have Python all setup... just how we need it i.e. did you really follow the [parent setup](../docs/setup.md)?
 
 We need some third party modules. We could just install globally, e.g. we need **pycrypto**:
 

@@ -123,9 +123,13 @@ class Blockchain:
     last_block = self.chain[-1]
     hashed_block = last_block.hash()
 
-    reward_transaction = Transaction(sender = "MINING", recipient = self.id, amount = self.mining_reward, signature = "")
-
     copied_transactions = self.open_transactions[:]
+
+    for tx in copied_transactions:
+      if not tx.verify(self.get_balance):
+        return False
+
+    reward_transaction = Transaction(sender=Transaction.mining, recipient=self.id, amount=self.mining_reward, signature="")
     copied_transactions.append(reward_transaction)
 
     block = Block(

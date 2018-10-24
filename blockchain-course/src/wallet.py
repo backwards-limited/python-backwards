@@ -47,6 +47,7 @@ class Wallet:
     except IOError:
       print("Failed to load wallet")
 
+  # TODO - Is this in the wrong place, as the "opposite" of verification is correctly in Transaction
   def sign(self, sender, recipient, amount):
     signer = PKCS1_v1_5.new(RSA.importKey(binascii.unhexlify(self.private_key)))
     hashedPayload = SHA256.new((str(sender) + str(recipient) + str(amount)).encode("utf8"))
