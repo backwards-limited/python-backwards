@@ -82,7 +82,8 @@ class Blockchain:
       :signature: All given data signed
     """
     if self.id == None:
-      return False
+      print("Failed to add transaction - no existing wallet")
+      return None
 
     transaction = Transaction(sender, recipient, amount, signature)
 
@@ -90,29 +91,31 @@ class Blockchain:
       self.open_transactions.append(transaction)
       self.save_data()
 
-      return True
+      return transaction
 
     else:
-      return False
+      print("Failed to add transaction - Verification failed")
+      return None
 
   def get_balance(self):
-    participant = self.id
+    if self.id == None:
+      return 0 # TODO - Not good to just default to this
 
     def amount(who):
-      def participants(transaction):
-        return transaction.counterpart(who) == participant
+      def counterpart(transaction):
+        return transaction.counterpart(who) == self.id
 
-      participantTransactionAmountsPerBlock = [[tx.amount for tx in block.transactions if participants(tx)] for block in self.chain]
-      print(f"{who} transaction amounts per block = {participantTransactionAmountsPerBlock}")
+      counterpartTransactionAmountsPerBlock = [[tx.amount for tx in block.transactions if counterpart(tx)] for block in self.chain]
+      print(f"{who} transaction amounts per block = {counterpartTransactionAmountsPerBlock}")
       
       return reduce(
-        lambda acc, participantTransactionAmounts: acc + sum(participantTransactionAmounts) if len(participantTransactionAmounts) > 0 else acc,
-        participantTransactionAmountsPerBlock,
+        lambda acc, counterpartTransactionAmounts: acc + sum(counterpartTransactionAmounts) if len(counterpartTransactionAmounts) > 0 else acc,
+        counterpartTransactionAmountsPerBlock,
         0
       )
 
     def amountOutstanding(who):
-      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == participant])
+      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == self.id])
 
     return amount("recipient") - amount("sender") - amountOutstanding("sender")
 
@@ -133,7 +136,7 @@ class Blockchain:
       if not tx.verify(self.get_balance):
         return None
 
-    reward_transaction = Transaction(sender = Transaction.mining, recipient = self.id, amount=  self.mining_reward, signature="")
+    reward_transaction = Transaction(sender = Transaction.mining, recipient = self.id, amount = self.mining_reward, signature = "")
     copied_transactions.append(reward_transaction)
 
     block = Block(

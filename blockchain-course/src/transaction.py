@@ -33,6 +33,11 @@ class Transaction (Printable):
     ])
 
   def verify(self, get_balance, check_funds = True):
+    print("==============================")
+    print(get_balance())
+    print(self.amount)
+    print("==============================")
+
     if check_funds and get_balance() < self.amount:
       return False
     else:

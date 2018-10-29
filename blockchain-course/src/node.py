@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from blockchain import Blockchain
 from wallet import Wallet
@@ -29,6 +29,52 @@ def load_keys():
   else:
     return fail("Loading keys failed", 500)
 
+@app.route("/balance", methods = ["GET"])
+def balance():
+  if wallet.public_key == None:
+    return fail("No wallet", 500)
+  else:
+    return jsonify({
+      "data": {
+        "message": "Fetched balance successfully",
+        "funds": blockchain.get_balance()
+      }
+    }), 200
+
+@app.route("/transaction", methods = ["POST"])
+def add_transaction():
+  if wallet.public_key == None:
+    return fail("Cannot add transaction - no existing wallet", 400)
+  else:
+    json = request.get_json()
+
+    if json:
+      required_fields = ["recipient", "amount"]
+
+      if all(field in json for field in required_fields):
+        recipient = json["recipient"]
+        amount = json["amount"]
+        signature = wallet.sign(wallet.public_key, recipient, amount)
+
+        transaction = blockchain.add_transaction(wallet.public_key, recipient, amount, signature)
+
+        if transaction  == None:
+          return fail("Failed to add transaction", 500)
+        else:
+          return jsonify({
+            "data": {
+              "message": "Transaction added successfully",
+              "transaction": dict(transaction.to_ordered_dict()),
+              "funds": blockchain.get_balance()
+            }
+          }), 201
+
+      else:
+        return fail("Required data is missing", 400)
+
+    else:
+      return fail("No appropriate transaction data given", 400)
+
 @app.route("/mine", methods = ["POST"])
 def mine():
   block = blockchain.mine_block()
@@ -45,7 +91,8 @@ def mine():
     return jsonify({
       "data": {
         "message": "Block added successfully",
-        "block": block.dict()
+        "block": block.dict(),
+        "funds": blockchain.get_balance()
       }
     }), 201
 
@@ -61,7 +108,8 @@ def reset_blockchain(responseCode):
   return jsonify({
       "data": {
           "public-key": wallet.public_key,
-          "private-key": wallet.private_key
+          "private-key": wallet.private_key,
+          "funds": blockchain.get_balance()
       }
   }), responseCode
 

@@ -105,6 +105,37 @@ HTTP/1.0 200 OK
 ...
 ```
 
+Wallet funds:
+
+```bash
+$ http localhost:5000/balance
+HTTP/1.0 200 OK
+...
+{
+  "data": {
+    "funds": 0,
+    "message": "Fetched balance successfully"
+...
+```
+
+### Transaction
+
+Add/Create a transaction:
+
+```bash
+$ http POST localhost:5000/transaction recipient=blah amount:=4.5
+HTTP/1.0 201 CREATED
+...
+{
+  "data": {
+    "funds": 51.5,
+    "message": "Transaction added successfully",
+    "transaction": {
+      "amount": 4.5,
+      "recipient": "blah"
+...
+```
+
 ### Mine
 
 Mine a new block:
