@@ -29,9 +29,10 @@ class Block (Printable):
     Said JSON is encoded a UTF-8 String and then hashed with the SHA256 algorithm.
     The hash that is actually generated is a byte hash, and this can be converted to a String using hexdigest().
     """
+    return hash(to_json(dict(), sort_keys = True).encode())
 
+  def dict(self):
     block_dict = self.__dict__.copy()
     block_dict["transactions"] = [tx.to_ordered_dict() for tx in block_dict["transactions"]]
 
-    return hash(to_json(block_dict, sort_keys = True).encode())
-    # return hash(to_json(self.__dict__.copy(), sort_keys=True).encode())
+    return block_dict

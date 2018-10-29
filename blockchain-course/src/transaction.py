@@ -28,8 +28,8 @@ class Transaction (Printable):
     return OrderedDict([
       ("sender", self.sender),
       ("recipient", self.recipient),
-      ("amount", self.amount)
-      # TODO - Should we include "signature"?
+      ("amount", self.amount),
+      ("signature", self.signature)
     ])
 
   def verify(self, get_balance, check_funds = True):

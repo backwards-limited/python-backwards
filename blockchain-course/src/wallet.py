@@ -36,16 +36,24 @@ class Wallet:
           file.write(self.public_key)
           file.write("\n")
           file.write(self.private_key)
+
+          return True
+
       except IOError:
         print("Failed to save wallet")
+        return False
 
   def load_keys(self):
     try:
       with open(Wallet.file_name, mode = "r") as file:
         self.public_key = file.readline().rstrip("\n")
         self.private_key = file.readline().rstrip("\n")
+
+        return True
+
     except IOError:
       print("Failed to load wallet")
+      return False
 
   # TODO - Is this in the wrong place, as the "opposite" of verification is correctly in Transaction
   def sign(self, sender, recipient, amount):

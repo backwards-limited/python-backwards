@@ -66,7 +66,8 @@ I'll simply go "global":
 pyenv global 3.7.0
 ```
 
-Another anonymous to resolve - we want to use **pip** to install third parties, but **pip** defaults to Python version 2, where we want version 3. Doing the following should give us what we want:
+We want to use [Pip](https://pypi.org/project/pip/) to install third parties, but **Pip** defaults to Python version 2, where we want version 3.
+Doing the following should give us what we want:
 
 ```bash
 python3 get-pip.py
@@ -82,7 +83,7 @@ If we have not run **python3 get-pip.py** then the above would need to be run as
 
 But wait! Whoops! We have just installed the pycrypto module globally. What if different projects need different versions?
 
-We can install third modules per project by using the Python package manager [Anaconda](https://www.anaconda.com/download/#macos).
+We can install third modules per project by using the (optional) Python package manager [Anaconda](https://www.anaconda.com/download/#macos).
 I don't know! Where on earth do they come up we these names?
 
 We can once again install using Homebrew:
@@ -111,3 +112,6 @@ The Navigator has a UI - take a look by running:
 ```bash
 anaconda-navigator
 ```
+
+Note that an alternative approach would be to use [Virtualenv](https://virtualenv.pypa.io).
+However, for convenience I've been cheating and simply installing libraries global.

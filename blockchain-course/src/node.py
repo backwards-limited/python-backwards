@@ -1,105 +1,76 @@
-"""Application"""
-
-from uuid import uuid4
-from block import Block
+from flask import Flask, jsonify
+from flask_cors import CORS
 from blockchain import Blockchain
-from transaction import Transaction
 from wallet import Wallet
 
-class Node:
-  def __init__(self, *args, **kwargs):
-    self.wallet = Wallet.create()
-    self.blockchain = Blockchain(self.wallet.public_key)
+app = Flask(__name__)
+CORS(app) # Since we have node communicating we need to allow calls from "other" clients, not just what is served by this node/server.
 
-  def get_user_choice(self):
-    return input("Your choice: ")
+wallet = Wallet()
+blockchain = Blockchain(wallet.public_key)
 
-  def get_transaction_value(self):
-    """Returns input of the user - a new transaction"""
-    recipient = input("Recipient of transaction? ")
-    amount = float(input("Your transaction amount: "))
+@app.route("/healthz", methods=["GET"])
+def health():
+  return "Good to go!"
 
-    return recipient, amount
+@app.route("/wallet", methods = ["POST"])
+def create_keys():
+  wallet.create_keys()
 
-  def print_blockchain_elements(self):
-    # Output the blockchain list to the console
-    for block in self.blockchain.chain:
-      print(f"Outputting Block: {block}")
-    else:
-      print("-" * 25)
+  if wallet.save_keys():
+    return reset_blockchain(201)
+  else:
+    return fail("Saving keys failed", 500)
 
-  def listen_for_input(self):
-    while True:
-      print("\nPlease choose")
-      print("1: Add a new transaction")
-      print("2: Mine a new block")
-      print("3: Output the blockchain blocks")
-      print("4: Check transaction validity")
-      print("5: Create wallet")
-      print("6: Load wallet")
-      print("7: Save wallet")
-      print("h: Manipulate the chain")
-      print("q: Quit")
-      user_choice = self.get_user_choice()
+@app.route("/wallet", methods = ["GET"])
+def load_keys():
+  if wallet.load_keys():
+    return reset_blockchain(200)
+  else:
+    return fail("Loading keys failed", 500)
 
-      if user_choice == "1":
-        recipient, amount = self.get_transaction_value()
+@app.route("/mine", methods = ["POST"])
+def mine():
+  block = blockchain.mine_block()
 
-        signature = self.wallet.sign(self.wallet.public_key, recipient, amount)
+  if block == None:
+    return jsonify({
+        "error": {
+            "message": "Adding a block failed",
+            "wallet-exists": wallet.public_key != None
+        }
+    }), 500
 
-        if self.blockchain.add_transaction(self.wallet.public_key, recipient, amount, signature):
-          print("Added transaction")
-        else:
-          print("Transaction failed")
+  else:
+    return jsonify({
+      "data": {
+        "message": "Block added successfully",
+        "block": block.dict()
+      }
+    }), 201
 
-        print(f"\nOpen transactions: {self.blockchain.open_transactions}")
+@app.route("/chain", methods = ["GET"])
+def chain():
+  chain_dict = [block.dict() for block in blockchain.chain]
+  return jsonify(chain_dict), 200
 
-      elif user_choice == "2":
-        if not self.blockchain.mine_block():
-          print("Mining failed - Have you been hacked?")
+def reset_blockchain(responseCode):
+  global blockchain
+  blockchain = Blockchain(wallet.public_key)
 
-      elif user_choice == "3":
-        self.print_blockchain_elements()
+  return jsonify({
+      "data": {
+          "public-key": wallet.public_key,
+          "private-key": wallet.private_key
+      }
+  }), responseCode
 
-      elif user_choice == "4":
-        if Transaction.verify_transactions(self.blockchain.open_transactions, self.blockchain.get_balance):
-          print("All transactions are valid")
-        else:
-          print("NOT all transactions are valid")
+def fail(message, responseCode):
+  return jsonify({
+      "error": {
+          "message": message
+      }
+  }), responseCode
 
-      elif user_choice == "5":
-        self.wallet.create_keys()
-        self.blockchain = Blockchain(self.wallet.public_key)
-
-      elif user_choice == "6":
-        self.wallet.load_keys()
-        self.blockchain = Blockchain(self.wallet.public_key)
-
-      elif user_choice == "7":
-        self.wallet.save_keys()
-
-      elif user_choice == "h":
-        if len(self.blockchain.chain) >= 1:
-          hackedBlock = Block.genesis_block()
-          hackedBlock.transactions = [Transaction(sender = "hacker1", recipient = "hacker2", amount = 100, signature = "hacked")]
-
-          self.blockchain.chain[0] = hackedBlock
-
-      elif user_choice == "q":
-        break
-
-      else:
-        print("Input invalid, please pick a value from the list!")
-
-      if not self.blockchain.verify_chain():
-        print("\nCorrupt Blockchain:")
-        self.print_blockchain_elements()
-        break
-
-      print(f"\nBalance of {self.wallet.public_key}: {self.blockchain.get_balance():6.2f}\n")
-
-    print("\nDone!")
-
-if "__main__" == __name__:
-  node = Node()
-  node.listen_for_input()
+if __name__ == "__main__":
+  app.run(host = "0.0.0.0", port = 5000)

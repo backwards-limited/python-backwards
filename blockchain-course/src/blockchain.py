@@ -117,8 +117,12 @@ class Blockchain:
     return amount("recipient") - amount("sender") - amountOutstanding("sender")
 
   def mine_block(self):
+    """
+    Mine a new block and return it.
+    Upon encountering an issue where block cannot be mined, a None is returned - TODO THIS SHOULD BE CHANGED TO INDICATE THE ISSUE
+    """
     if self.id == None:
-      return False
+      return None
 
     last_block = self.chain[-1]
     hashed_block = last_block.hash()
@@ -127,9 +131,9 @@ class Blockchain:
 
     for tx in copied_transactions:
       if not tx.verify(self.get_balance):
-        return False
+        return None
 
-    reward_transaction = Transaction(sender=Transaction.mining, recipient=self.id, amount=self.mining_reward, signature="")
+    reward_transaction = Transaction(sender = Transaction.mining, recipient = self.id, amount=  self.mining_reward, signature="")
     copied_transactions.append(reward_transaction)
 
     block = Block(
@@ -145,7 +149,7 @@ class Blockchain:
     self.open_transactions = []
     self.save_data()
 
-    return True
+    return block
 
   def verify_chain(self):
     """Verify the current blockchain, returning True if valid, otherwise False - Note we skip the first genesis entry"""
