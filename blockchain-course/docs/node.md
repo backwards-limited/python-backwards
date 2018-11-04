@@ -58,9 +58,20 @@ Call the API via:
 - HTTP Client such as [Insomnia](https://insomnia.rest/)
 - HTTP command line client such as OS built in **curl**, or better [httpie](https://httpie.org) which we'll see examples below
 
+### Health
+
+```bash
+$ http localhost:5000/healthz
+HTTP/1.0 200 OK
+...
+Good to go!
+```
+
+Note the responses show "..." for brevity
+
 ### Chain
 
-View current chain (note responses use "..." for brevity):
+View current chain:
 
 ```bash
 $ http localhost:5000/chain
@@ -135,6 +146,22 @@ HTTP/1.0 201 CREATED
       "recipient": "blah"
 ...
 ```
+
+Open transactions:
+
+```bash
+$ http GET localhost:5000/transactions
+HTTP/1.0 200 OK
+...
+{
+  "data": {
+    "transactions": [
+      {
+        "amount": 3,
+        "recipient": ...
+```
+
+
 
 ### Mine
 
