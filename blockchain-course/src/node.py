@@ -34,12 +34,10 @@ def balance():
   if wallet.public_key == None:
     return fail("No wallet", 500)
   else:
-    return jsonify({
-      "data": {
-        "message": "Fetched balance successfully",
-        "funds": blockchain.get_balance()
-      }
-    }), 200
+    return success({
+      "message": "Fetched balance successfully",
+      "funds": blockchain.get_balance()
+    }, 200)
 
 @app.route("/transaction", methods = ["POST"])
 def add_transaction():
@@ -61,13 +59,11 @@ def add_transaction():
         if transaction  == None:
           return fail("Failed to add transaction", 500)
         else:
-          return jsonify({
-            "data": {
-              "message": "Transaction added successfully",
-              "transaction": dict(transaction.to_ordered_dict()),
-              "funds": blockchain.get_balance()
-            }
-          }), 201
+          return success({
+            "message": "Transaction added successfully",
+            "transaction": dict(transaction.to_ordered_dict()),
+            "funds": blockchain.get_balance()
+          }, 201)
 
       else:
         return fail("Required data is missing", 400)
@@ -88,13 +84,17 @@ def mine():
     }), 500
 
   else:
-    return jsonify({
-      "data": {
-        "message": "Block added successfully",
-        "block": block.dict(),
-        "funds": blockchain.get_balance()
-      }
-    }), 201
+    return success({
+      "message": "Block added successfully",
+      "block": block.dict(),
+      "funds": blockchain.get_balance()
+    }, 201)
+
+@app.route("/transactions", methods = ["GET"])
+def transactions():
+  return success({
+    "transactions": [tx.__dict__ for tx in blockchain.open_transactions]
+  }, 200)
 
 @app.route("/chain", methods = ["GET"])
 def chain():
@@ -105,13 +105,20 @@ def reset_blockchain(responseCode):
   global blockchain
   blockchain = Blockchain(wallet.public_key)
 
-  return jsonify({
-      "data": {
-          "public-key": wallet.public_key,
-          "private-key": wallet.private_key,
-          "funds": blockchain.get_balance()
-      }
-  }), responseCode
+  return success({
+    "public-key": wallet.public_key,
+    "private-key": wallet.private_key,
+    "funds": blockchain.get_balance()
+  }, responseCode)
+
+def success(json, responseCode):
+  j = {
+    "data": {}
+  }
+
+  j["data"] = json
+
+  return jsonify(j), responseCode
 
 def fail(message, responseCode):
   return jsonify({
