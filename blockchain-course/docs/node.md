@@ -161,8 +161,6 @@ HTTP/1.0 200 OK
         "recipient": ...
 ```
 
-
-
 ### Mine
 
 Mine a new block:
@@ -178,3 +176,7 @@ HTTP/1.0 201 CREATED
       "previous_hash":
 ...
 ```
+
+### UI
+
+The APIs can be accessed via a UI instead from your [browser](http://localhost:5000).

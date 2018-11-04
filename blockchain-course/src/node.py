@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from blockchain import Blockchain
 from wallet import Wallet
@@ -9,7 +9,11 @@ CORS(app) # Since we have node communicating we need to allow calls from "other"
 wallet = Wallet()
 blockchain = Blockchain(wallet.public_key)
 
-@app.route("/healthz", methods=["GET"])
+@app.route("/", methods = ["GET"])
+def ui():
+  return send_from_directory("ui", "node.html")
+
+@app.route("/healthz", methods= ["GET"])
 def health():
   return "Good to go!"
 
