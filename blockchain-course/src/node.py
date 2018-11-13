@@ -7,9 +7,6 @@ from wallet import Wallet
 app = Flask(__name__)
 CORS(app) # Since we have node communicating we need to allow calls from "other" clients, not just what is served by this node/server.
 
-wallet = Wallet()
-blockchain = Blockchain(wallet.public_key)
-
 @app.route("/", methods = ["GET"])
 def node_ui():
   return send_from_directory("ui", "node.html")
@@ -139,12 +136,12 @@ def remove_node(node_ip):
 @app.route("/nodes", methods = ["GET"])
 def nodes():
   return success({
-      "nodes": list(blockchain.peer_node_ips)
+    "nodes": list(blockchain.peer_node_ips)
   }, 200)
 
 def reset_blockchain(responseCode):
   global blockchain
-  blockchain = Blockchain(wallet.public_key)
+  blockchain = Blockchain(wallet.public_key, id)
 
   return success({
     "public-key": wallet.public_key,
@@ -163,10 +160,25 @@ def success(json, responseCode):
 
 def fail(message, responseCode):
   return jsonify({
-      "error": {
-          "message": message
-      }
+    "error": {
+      "message": message
+    }
   }), responseCode
 
 if __name__ == "__main__":
-  app.run(host = "0.0.0.0", port = 5000)
+  from argparse import ArgumentParser
+
+  parser = ArgumentParser()
+  parser.add_argument("-p", "--port", type = int)
+  args = parser.parse_args()
+
+  id = args.port
+
+  if id == None:
+    # TODO
+    print("Booting nodes locally from existing blockchains")
+  else:
+    wallet = Wallet(id)
+    blockchain = Blockchain(wallet.public_key, id)
+
+    app.run(host="0.0.0.0", port=id)

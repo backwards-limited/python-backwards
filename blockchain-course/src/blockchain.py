@@ -7,13 +7,16 @@ from transaction import Transaction
 from pow import ProofOfWork as pow
 
 class Blockchain:
-  file_name = "blockchain.txt"
-
   mining_reward = 10
 
-  def __init__(self, host_node_id):
-    self.host_node_id = host_node_id
+  def __init__(self, public_key, id = None):
+    self.public_key = public_key
     self.peer_node_ips = set()
+
+    if id == None:
+      self.file_name = "blockchain.txt"
+    else:  
+      self.file_name = f"blockchain-{id}.txt"
 
     # Initialising our blockchain list
     self.chain = [Block.genesis_block()]
@@ -25,7 +28,7 @@ class Blockchain:
 
   def load_data(self):
     try:
-      with open(Blockchain.file_name, mode = "r") as file:
+      with open(self.file_name, mode = "r") as file:
         def parse_transaction(transaction):
           return Transaction(transaction["sender"], transaction["recipient"], transaction["amount"], transaction["signature"])
 
@@ -62,7 +65,7 @@ class Blockchain:
       print("Warning: No existing Blockchain to load - New one will be created upon first 'mine'")
 
   def save_data(self):
-    with open(Blockchain.file_name, mode = "w") as file:
+    with open(self.file_name, mode=  "w") as file:
       print(self.chain)
       file.write(to_json([block.__dict__.copy() for block in [Block(b.index, b.previous_hash, [tx.__dict__ for tx in b.transactions], b.proof, b.timestamp) for b in self.chain]]))
       file.write("\n")
@@ -87,7 +90,7 @@ class Blockchain:
       :amount: The amount of coins sent with the transaction
       :signature: All given data signed
     """
-    if self.host_node_id == None:
+    if self.public_key == None:
       print("Failed to add transaction - no existing wallet")
       return None
 
@@ -104,12 +107,12 @@ class Blockchain:
       return None
 
   def get_balance(self):
-    if self.host_node_id == None:
+    if self.public_key == None:
       return 0 # TODO - Not good to just default to this
 
     def amount(who):
       def counterpart(transaction):
-        return transaction.counterpart(who) == self.host_node_id
+        return transaction.counterpart(who) == self.public_key
 
       counterpartTransactionAmountsPerBlock = [[tx.amount for tx in block.transactions if counterpart(tx)] for block in self.chain]
       print(f"{who} transaction amounts per block = {counterpartTransactionAmountsPerBlock}")
@@ -121,7 +124,7 @@ class Blockchain:
       )
 
     def amountOutstanding(who):
-      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == self.host_node_id])
+      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == self.public_key])
 
     return amount("recipient") - amount("sender") - amountOutstanding("sender")
 
@@ -130,7 +133,7 @@ class Blockchain:
     Mine a new block and return it.
     Upon encountering an issue where block cannot be mined, a None is returned - TODO THIS SHOULD BE CHANGED TO INDICATE THE ISSUE
     """
-    if self.host_node_id == None:
+    if self.public_key == None:
       return None
 
     last_block = self.chain[-1]
@@ -142,7 +145,7 @@ class Blockchain:
       if not tx.verify(self.get_balance):
         return None
 
-    reward_transaction = Transaction(sender = Transaction.mining, recipient = self.host_node_id, amount = self.mining_reward, signature = "")
+    reward_transaction = Transaction(sender = Transaction.mining, recipient = self.public_key, amount = self.mining_reward, signature = "")
     copied_transactions.append(reward_transaction)
 
     block = Block(

@@ -5,17 +5,20 @@ import Crypto.Random
 import binascii
 
 class Wallet:
-  file_name = "wallet.txt"
-
   @staticmethod
   def create():
     wallet = Wallet()
     wallet.create_keys()
     return wallet
 
-  def __init__(self, *args, **kwargs):
+  def __init__(self, id = None):
     self.public_key = None
     self.private_key = None
+
+    if id == None:
+      self.file_name = "wallet.txt"
+    else:
+      self.file_name = f"wallet-{id}.txt"
 
   def create_keys(self):
     def generate_keys():
@@ -32,7 +35,7 @@ class Wallet:
   def save_keys(self):
     if self.public_key != None and self.private_key != None:
       try:
-        with open(Wallet.file_name, mode = "w") as file:
+        with open(self.file_name, mode = "w") as file:
           file.write(self.public_key)
           file.write("\n")
           file.write(self.private_key)
@@ -45,7 +48,7 @@ class Wallet:
 
   def load_keys(self):
     try:
-      with open(Wallet.file_name, mode = "r") as file:
+      with open(self.file_name, mode = "r") as file:
         self.public_key = file.readline().rstrip("\n")
         self.private_key = file.readline().rstrip("\n")
 
