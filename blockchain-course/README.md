@@ -6,8 +6,12 @@ A Blockchain Cryptocurrency developed in Python upon following the excellent cou
 
 - [Setup](docs/setup.md)
 
+- [Blockchain](docs/blockchain.md)
+
 - Run
 
   - [Standalone](docs/node-standalone.md)
 
   - [Node](docs/node.md)
+
+  - [Nodes](docs/nodes.md)

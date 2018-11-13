@@ -129,6 +129,22 @@ HTTP/1.0 200 OK
 ...
 ```
 
+### Mine
+
+Mine a new block:
+
+```bash
+$ http POST localhost:5000/mine
+HTTP/1.0 201 CREATED
+...
+{
+  "data": {
+    "block": {
+      "index": 10,
+      "previous_hash":
+...
+```
+
 ### Transaction
 
 Add/Create a transaction:
@@ -159,22 +175,6 @@ HTTP/1.0 200 OK
       {
         "amount": 3,
         "recipient": ...
-```
-
-### Mine
-
-Mine a new block:
-
-```bash
-$ http POST localhost:5000/mine
-HTTP/1.0 201 CREATED
-...
-{
-  "data": {
-    "block": {
-      "index": 10,
-      "previous_hash":
-...
 ```
 
 ### UI

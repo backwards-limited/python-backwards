@@ -11,8 +11,9 @@ class Blockchain:
 
   mining_reward = 10
 
-  def __init__(self, id):
-    self.id = id
+  def __init__(self, host_node_id):
+    self.host_node_id = host_node_id
+    self.peer_node_ips = set()
 
     # Initialising our blockchain list
     self.chain = [Block.genesis_block()]
@@ -50,19 +51,24 @@ class Blockchain:
             for tx in from_json(loaded_open_transactions):
               self.open_transactions.append(parse_transaction(tx))
 
+        def load_peer_node_ips(peer_node_ips):
+          self.peer_node_ips = set(from_json(peer_node_ips))
+
         load_blockchain(file.readline().rstrip("\n"))
         load_open_transactions(file.readline().rstrip("\n"))
+        load_peer_node_ips(file.readline().rstrip("\n"))
 
     except FileNotFoundError:
       print("Warning: No existing Blockchain to load - New one will be created upon first 'mine'")
 
   def save_data(self):
     with open(Blockchain.file_name, mode = "w") as file:
-      print("Saving")
       print(self.chain)
       file.write(to_json([block.__dict__.copy() for block in [Block(b.index, b.previous_hash, [tx.__dict__ for tx in b.transactions], b.proof, b.timestamp) for b in self.chain]]))
       file.write("\n")
       file.write(to_json([tx.__dict__.copy() for tx in self.open_transactions]))
+      file.write("\n")
+      file.write(to_json(list(self.peer_node_ips)))
 
   def get_last_blockchain_value(self):
     """Returns the last value of the current blockchain"""
@@ -81,7 +87,7 @@ class Blockchain:
       :amount: The amount of coins sent with the transaction
       :signature: All given data signed
     """
-    if self.id == None:
+    if self.host_node_id == None:
       print("Failed to add transaction - no existing wallet")
       return None
 
@@ -98,12 +104,12 @@ class Blockchain:
       return None
 
   def get_balance(self):
-    if self.id == None:
+    if self.host_node_id == None:
       return 0 # TODO - Not good to just default to this
 
     def amount(who):
       def counterpart(transaction):
-        return transaction.counterpart(who) == self.id
+        return transaction.counterpart(who) == self.host_node_id
 
       counterpartTransactionAmountsPerBlock = [[tx.amount for tx in block.transactions if counterpart(tx)] for block in self.chain]
       print(f"{who} transaction amounts per block = {counterpartTransactionAmountsPerBlock}")
@@ -115,7 +121,7 @@ class Blockchain:
       )
 
     def amountOutstanding(who):
-      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == self.id])
+      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == self.host_node_id])
 
     return amount("recipient") - amount("sender") - amountOutstanding("sender")
 
@@ -124,7 +130,7 @@ class Blockchain:
     Mine a new block and return it.
     Upon encountering an issue where block cannot be mined, a None is returned - TODO THIS SHOULD BE CHANGED TO INDICATE THE ISSUE
     """
-    if self.id == None:
+    if self.host_node_id == None:
       return None
 
     last_block = self.chain[-1]
@@ -136,7 +142,7 @@ class Blockchain:
       if not tx.verify(self.get_balance):
         return None
 
-    reward_transaction = Transaction(sender = Transaction.mining, recipient = self.id, amount = self.mining_reward, signature = "")
+    reward_transaction = Transaction(sender = Transaction.mining, recipient = self.host_node_id, amount = self.mining_reward, signature = "")
     copied_transactions.append(reward_transaction)
 
     block = Block(
@@ -173,3 +179,17 @@ class Blockchain:
           return False
 
     return True
+
+  def add_peer_node(self, node_ip):
+    """
+    Adds a new node to the managed set of peer nodes.
+
+    Arguments:
+      :node_ip: Node URL to be added.
+    """
+    self.peer_node_ips.add(node_ip)
+    self.save_data()
+
+  def remove_peer_node(self, node_ip):
+    self.peer_node_ips.discard(node_ip)
+    self.save_data()

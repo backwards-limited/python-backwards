@@ -11,7 +11,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 Install essentials:
 
 ```bash
-brew update
 brew install python
 ```
 
@@ -23,7 +22,7 @@ python2
 python3
 ```
 
-We want to use Python 3 (3.7.0 being the latest at this moment in time). Let's manage our Python versions via:
+We want to use Python 3 (3.7.0 being the latest at this moment in time). Let's manage our Python versions.
 
 Odd, but we have to make sure Xcode is up to date by doing the following first:
 

@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
+from json import loads as from_json
 from blockchain import Blockchain
 from wallet import Wallet
 
@@ -10,8 +11,12 @@ wallet = Wallet()
 blockchain = Blockchain(wallet.public_key)
 
 @app.route("/", methods = ["GET"])
-def ui():
+def node_ui():
   return send_from_directory("ui", "node.html")
+
+@app.route("/network", methods = ["GET"])
+def newtwork_ui():
+  return send_from_directory("ui", "network.html")
 
 @app.route("/healthz", methods= ["GET"])
 def health():
@@ -104,6 +109,38 @@ def transactions():
 def chain():
   chain_dict = [block.dict() for block in blockchain.chain]
   return jsonify(chain_dict), 200
+
+@app.route("/node", methods = ["POST"])
+def add_node():
+  try:
+    json = from_json(request.data)
+    blockchain.add_peer_node(json["node-ip"])
+
+    return success({
+      "message": "Node added successfully",
+      "nodes": list(blockchain.peer_node_ips)
+    }, 201)
+
+  except (ValueError, KeyError, TypeError):
+    return fail("Valid node IP not provided", 400)
+
+@app.route("/node/<node_ip>", methods = ["DELETE"])
+def remove_node(node_ip):
+  if node_ip in blockchain.peer_node_ips:
+    blockchain.remove_peer_node(node_ip)
+
+    return success({
+      "message": f"Node {node_ip} removed",
+      "nodes": list(blockchain.peer_node_ips)
+    }, 200)
+  else:
+    return fail(f"Given node {node_ip} not found for removal", 400)  
+
+@app.route("/nodes", methods = ["GET"])
+def nodes():
+  return success({
+      "nodes": list(blockchain.peer_node_ips)
+  }, 200)
 
 def reset_blockchain(responseCode):
   global blockchain
