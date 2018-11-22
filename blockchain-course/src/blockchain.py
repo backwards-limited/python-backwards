@@ -133,18 +133,20 @@ class Blockchain:
     if self.chain[-1].hash() != block.previous_hash:
       return False
     elif not pow.valid_proof(block.previous_hash, block.transactions, block.proof):
-      print("==========> Whyyyyyyyyyyyyyyyyyyyyy")
-      print("=======================================")
-      print("FAILED PROOF")
-      print("Previous hash = " + str(block.previous_hash))
-      print("Proof = " + str(block.proof))
-      print("Transactions = " + str(block.transactions))
-      print("=======================================")
-
       return False
     else:
       self.chain.append(block)
       self.save_data()
+
+      # Remove open transactions that are in the given block being added
+      for tx in block.transactions:
+        for opentx in self.open_transactions[:]:
+          if tx == opentx:
+            try:
+              self.open_transactions.remove(opentx)
+            except:
+              print("""Open transaction already removed during "add_block" """)
+
       return True
 
   def broadcast_block(self, block):

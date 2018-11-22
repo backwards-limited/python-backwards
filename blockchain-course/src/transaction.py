@@ -21,6 +21,14 @@ class Transaction (Printable):
   def __repr__(self):
     return repr(self.__dict__)
 
+  def __eq__(self, other):
+    if self is None and other is None:
+      return True
+    elif self is None or other is None:
+      return False
+    else:  
+      return self.__dict__ == other.__dict__
+
   def counterpart(self, who):
     return self.__getattribute__(who)
 
