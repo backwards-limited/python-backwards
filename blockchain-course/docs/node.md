@@ -43,13 +43,6 @@ $ python node.py
  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ```
 
-and check the **node's** health:
-
-```bash
-$ curl http://localhost:5000/healthz
-Good to go!
-```
-
 ## API
 
 Call the API via:

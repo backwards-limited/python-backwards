@@ -1,9 +1,16 @@
 from hashlib import sha256
+from transaction import Transaction
 
 class ProofOfWork:
   @staticmethod
   def valid_proof(last_hash, transactions, proof):
-    guess = (str(last_hash) + str([tx.to_ordered_dict() for tx in transactions]) + str(proof)).encode()
+    """Note that if the last transaction is a "mining" reward, it is excluded from the proof"""
+    transactionsIndex = len(transactions)
+
+    if transactionsIndex > 0 and transactions[-1].sender == Transaction.mining:
+      transactionsIndex = -1
+
+    guess = (str(last_hash) + str([tx.to_ordered_dict() for tx in transactions[: transactionsIndex]]) + str(proof)).encode()
     guess_hash = sha256(guess).hexdigest()
 
     return guess_hash[0: 2] == "00"

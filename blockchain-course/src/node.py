@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from json import loads as from_json
+from block import Block
 from blockchain import Blockchain
+from transaction import Transaction
 from wallet import Wallet
 
 app = Flask(__name__)
@@ -42,8 +44,25 @@ def balance():
   else:
     return success({
       "message": "Fetched balance successfully",
-      "funds": blockchain.get_balance()
+      "funds": blockchain.get_balance(wallet.public_key)
     }, 200)
+
+@app.route("/transaction/broadcast", methods = ["POST"])
+def transaction_broadcast():
+  try:
+    json = from_json(request.data)
+    transaction = blockchain.add_transaction(json["sender"], json["recipient"], json["amount"], json["signature"], is_receiving = True)
+    
+    if transaction == None:
+      return fail("Failed to add broadcast transaction", 500)
+    else:
+      return success({
+        "message": "Successfully added broadcast transaction",
+        "transaction": dict(transaction.to_ordered_dict())
+      }, 201)
+
+  except (ValueError, KeyError, TypeError):
+    return fail("Failed to add broadcast transaction", 400)
 
 @app.route("/transaction", methods = ["POST"])
 def add_transaction():
@@ -68,7 +87,7 @@ def add_transaction():
           return success({
             "message": "Transaction added successfully",
             "transaction": dict(transaction.to_ordered_dict()),
-            "funds": blockchain.get_balance()
+            "funds": blockchain.get_balance(wallet.public_key)
           }, 201)
 
       else:
@@ -93,8 +112,32 @@ def mine():
     return success({
       "message": "Block added successfully",
       "block": block.dict(),
-      "funds": blockchain.get_balance()
+      "funds": blockchain.get_balance(wallet.public_key)
     }, 201)
+
+@app.route("/block/broadcast", methods = ["POST"])
+def block_broadcast():
+  try:
+    json = from_json(request.data)["block"]
+
+    transactions = [Transaction(tx["sender"], tx["recipient"], tx["amount"], tx["signature"]) for tx in json["transactions"]]
+    block = Block(json["index"], json["previous-hash"], transactions, json["proof"], json["timestamp"])
+
+    if block.index == blockchain.chain[-1].index + 1:
+      if blockchain.add_block(block):
+        return success({
+          "message": "Successfully added broadcast block",
+          "block": block.dict()
+        }, 201)
+      else:
+        return fail("Failed to add broadcast block", 500)  
+    elif block.index > blockchain.chain[-1].index:
+      pass  
+    else:
+      return fail("Broadcast blockchain is shorter - Not added", 409)
+      
+  except (ValueError, KeyError, TypeError):
+    return fail("Failed to add broadcast block", 400)
 
 @app.route("/transactions", methods = ["GET"])
 def transactions():
@@ -146,7 +189,7 @@ def reset_blockchain(responseCode):
   return success({
     "public-key": wallet.public_key,
     "private-key": wallet.private_key,
-    "funds": blockchain.get_balance()
+    "funds": blockchain.get_balance(wallet.public_key)
   }, responseCode)
 
 def success(json, responseCode):
@@ -175,10 +218,17 @@ if __name__ == "__main__":
   id = args.port
 
   if id == None:
+    # Booting: python node.py
     # TODO
-    print("Booting nodes locally from existing blockchains")
+    print("Booting nodes locally from existing blockchains - WIP where we currently hardcode a node on port 5000")
+    port_hard_coded = 5000
+    wallet = Wallet(port_hard_coded)
+    blockchain = Blockchain(wallet.public_key, port_hard_coded)
+
+    app.run(host="0.0.0.0", port = port_hard_coded)
   else:
+    # Booting: python node.py --port=5001 and python node.py --port=5002 etc.
     wallet = Wallet(id)
     blockchain = Blockchain(wallet.public_key, id)
 
-    app.run(host="0.0.0.0", port=id)
+    app.run(host="0.0.0.0", port = id)

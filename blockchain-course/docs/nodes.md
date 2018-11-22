@@ -2,7 +2,28 @@
 
 >![Nodes](images/nodes.png)
 
+## Run Nodes
 
+Within **src** of this module start as many required nodes:
+
+```bash
+$ python node.py --port=5001
+ * Serving Flask app "node" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://0.0.0.0:5001/ (Press CTRL+C to quit)
+ 
+$ python node.py --port=5002
+Warning: No existing Blockchain to load - New one will be created upon first 'mine'
+ * Serving Flask app "node" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://0.0.0.0:5002/ (Press CTRL+C to quit) 
+```
 
 ## API
 

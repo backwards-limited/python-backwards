@@ -10,7 +10,7 @@ class Transaction (Printable):
 
   @staticmethod
   def verify_transactions(transactions, get_balance):
-    return all([tx.verify(get_balance, False) for tx in transactions])
+    return all([tx.verify(get_balance(tx.sender), False) for tx in transactions])
 
   def __init__(self, sender, recipient, amount, signature):
     self.sender = sender
@@ -33,12 +33,7 @@ class Transaction (Printable):
     ])
 
   def verify(self, get_balance, check_funds = True):
-    print("==============================")
-    print(get_balance())
-    print(self.amount)
-    print("==============================")
-
-    if check_funds and get_balance() < self.amount:
+    if check_funds and get_balance(self.sender) < self.amount:
       return False
     else:
       public_key = RSA.importKey(binascii.unhexlify(self.sender))

@@ -2,6 +2,7 @@ from copy import deepcopy
 from functools import reduce
 from json import dumps as to_json
 from json import loads as from_json
+import requests
 from block import Block
 from transaction import Transaction
 from pow import ProofOfWork as pow
@@ -55,7 +56,8 @@ class Blockchain:
               self.open_transactions.append(parse_transaction(tx))
 
         def load_peer_node_ips(peer_node_ips):
-          self.peer_node_ips = set(from_json(peer_node_ips))
+          if len(peer_node_ips) > 0:
+            self.peer_node_ips = set(from_json(peer_node_ips))
 
         load_blockchain(file.readline().rstrip("\n"))
         load_open_transactions(file.readline().rstrip("\n"))
@@ -80,7 +82,7 @@ class Blockchain:
     else:
       return self.chain[-1]
 
-  def add_transaction(self, sender, recipient, amount, signature):
+  def add_transaction(self, sender, recipient, amount, signature, is_receiving = False): # TODO - Remove temporary hack of "is_receiving"
     """ 
     Append a new transaction to list of open transactions
 
@@ -90,29 +92,87 @@ class Blockchain:
       :amount: The amount of coins sent with the transaction
       :signature: All given data signed
     """
-    if self.public_key == None:
-      print("Failed to add transaction - no existing wallet")
-      return None
+    # if self.public_key == None:
+    #   print("Failed to add transaction - no existing wallet")
+    #   return None
 
     transaction = Transaction(sender, recipient, amount, signature)
 
     if transaction.verify(self.get_balance):
       self.open_transactions.append(transaction)
       self.save_data()
-
-      return transaction
+      
+      if not is_receiving:
+        if self.broadcast_transaction(transaction):
+          return transaction
+        else:
+          return None
+      else:
+        return transaction
 
     else:
       print("Failed to add transaction - Verification failed")
       return None
 
-  def get_balance(self):
-    if self.public_key == None:
-      return 0 # TODO - Not good to just default to this
+  def broadcast_transaction(self, transaction):
+    for node in self.peer_node_ips:
+      try:
+        response = requests.post(f"http://{node}/transaction/broadcast", json = dict(transaction.to_ordered_dict()))
 
+        if response.status_code == 400 or response.status_code == 500:
+          # TODO
+          print(f"Transaction declined by node {node}")
+          return False
+
+      except requests.exceptions.ConnectionError:
+        continue
+
+    return True        
+
+  def add_block(self, block):
+    if self.chain[-1].hash() != block.previous_hash:
+      return False
+    elif not pow.valid_proof(block.previous_hash, block.transactions, block.proof):
+      print("==========> Whyyyyyyyyyyyyyyyyyyyyy")
+      print("=======================================")
+      print("FAILED PROOF")
+      print("Previous hash = " + str(block.previous_hash))
+      print("Proof = " + str(block.proof))
+      print("Transactions = " + str(block.transactions))
+      print("=======================================")
+
+      return False
+    else:
+      self.chain.append(block)
+      self.save_data()
+      return True
+
+  def broadcast_block(self, block):
+    for node in self.peer_node_ips:
+      try:
+        print("Going to broadcast block = " + str(block.dict()))
+
+        response = requests.post(
+          f"http://{node}/block/broadcast",
+          json = {
+            "block": block.dict()
+          }
+        )
+
+        if response.status_code == 400 or response.status_code == 500:
+          # TODO
+          print(f"Block declined by node {node}")
+          return False
+
+      except requests.exceptions.ConnectionError:
+        continue
+
+    return True
+
+  def get_balance(self, sender):
     def amount(who):
       def counterpart(transaction):
-        return transaction.counterpart(who) == self.public_key
+        return transaction.counterpart(who) == sender
 
       counterpartTransactionAmountsPerBlock = [[tx.amount for tx in block.transactions if counterpart(tx)] for block in self.chain]
       print(f"{who} transaction amounts per block = {counterpartTransactionAmountsPerBlock}")
@@ -124,7 +184,7 @@ class Blockchain:
       )
 
     def amountOutstanding(who):
-      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == self.public_key])
+      return sum([tx.amount for tx in self.open_transactions if tx.counterpart(who) == sender])
 
     return amount("recipient") - amount("sender") - amountOutstanding("sender")
 
@@ -156,10 +216,9 @@ class Blockchain:
     )
 
     self.chain.append(block)
-
-    # Reset
-    self.open_transactions = []
+    self.open_transactions = [] # Reset
     self.save_data()
+    self.broadcast_block(block)
 
     return block
 
@@ -175,9 +234,7 @@ class Blockchain:
           print("self.chain[index - 1].hash() = " + self.chain[index - 1].hash())
           return False
 
-        transactionsExcludingLastReward = block.transactions[: -1]
-
-        if not pow.valid_proof(block.previous_hash, transactionsExcludingLastReward, block.proof):
+        if not pow.valid_proof(block.previous_hash, block.transactions, block.proof):
           print("Proof of Work invalid")
           return False
 

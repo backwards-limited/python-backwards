@@ -91,7 +91,7 @@ class Node:
         self.print_blockchain_elements()
         break
 
-      print(f"\nBalance of {self.wallet.public_key}: {self.blockchain.get_balance():6.2f}\n")
+      print(f"\nBalance of {self.wallet.public_key}: {self.blockchain.get_balance(self.wallet.public_key):6.2f}\n")
 
     print("\nDone!")
 

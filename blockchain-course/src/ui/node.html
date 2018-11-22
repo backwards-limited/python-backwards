@@ -184,7 +184,7 @@
 
                 <div v-if="view === 'chain'" class="collapse" :class="{show: showElement === index}">
                   <div class="card-body">
-                    <p><b>Previous Hash:</b> {{ data.previous_hash }}</p>
+                    <p><b>Previous Hash:</b> {{ data["previous-hash"] }}</p>
 
                     <div class="list-group">
                       <div v-for="tx in data.transactions" class="list-group-item flex-column align-items-start">

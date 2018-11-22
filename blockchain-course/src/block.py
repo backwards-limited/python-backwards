@@ -33,6 +33,7 @@ class Block (Printable):
 
   def dict(self):
     block_dict = self.__dict__.copy()
-    block_dict["transactions"] = [tx.to_ordered_dict() for tx in block_dict["transactions"]]
+    block_dict["previous-hash"] = block_dict.pop("previous_hash")
+    block_dict["transactions"] = [dict(tx.to_ordered_dict()) for tx in block_dict["transactions"]]
 
     return block_dict
