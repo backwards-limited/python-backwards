@@ -98,18 +98,17 @@ def mine():
   if blockchain.resolve_conflicts:
     return fail(409, "Resolve conflicts first, block not added")
 
-  block_count_before_mine = len(blockchain.chain)
   block = blockchain.mine_block()
 
-  if len(blockchain.chain) > block_count_before_mine:
-    return success(201, "Block added successfully", {
-      "block": block.dict(),
-      "funds": blockchain.get_balance(wallet.public_key)
+  if block is None:
+    return fail(500, "Adding a block failed", {
+      "wallet-exists": wallet.public_key != None
     })
 
   else:
-    return fail(500, "Adding a block failed", {
-      "wallet-exists": wallet.public_key != None
+    return success(201, "Block added successfully", {
+      "block": block.dict(),
+      "funds": blockchain.get_balance(wallet.public_key)
     })
 
 @app.route("/block/broadcast", methods = ["POST"])
@@ -117,8 +116,8 @@ def block_broadcast():
   try:
     json = from_json(request.data)["block"]
 
-    transactions = [Transaction(tx["sender"], tx["recipient"], tx["amount"], tx["signature"]) for tx in json["transactions"]]
-    block = Block(json["index"], json["previous-hash"], transactions, json["proof"], json["timestamp"])
+    txs = [Transaction(tx["sender"], tx["recipient"], tx["amount"], tx["signature"]) for tx in json["transactions"]]
+    block = Block(json["index"], json["previous-hash"], txs, json["proof"], json["timestamp"])
 
     if block.index == blockchain.chain[-1].index + 1:
       if blockchain.add_block(block):
