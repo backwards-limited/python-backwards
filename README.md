@@ -8,7 +8,5 @@ Python functionality showing example usage while covering Python courses, such a
 
 - [Setup](docs/setup.md)
 
-- [Modules](docs/modules.md)
-
 - Courses (module per course)
   - [Blockchain Course](blockchain-course/README.md)

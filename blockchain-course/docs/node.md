@@ -70,14 +70,16 @@ View current chain:
 $ http localhost:5000/chain
 HTTP/1.0 200 OK
 ...
-[
-  {
-    "index": 0,
-    "previous_hash": "",
-    "proof": 100,
-    "timestamp": 0,
-    "transactions": []
-  },
+{
+    "data": {
+        "blockchain": [
+            {
+                "index": 0,
+                "previous-hash": "",
+                "proof": 100,
+                "timestamp": 0,
+                "transactions": []
+            },
 ...
 ```
 

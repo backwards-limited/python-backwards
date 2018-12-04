@@ -25,6 +25,8 @@ class Blockchain:
     # Open/Unconfirmed transactions
     self.open_transactions = []
 
+    self.resolve_conflicts = False
+
     self.load_data()
 
   def load_data(self):
@@ -164,7 +166,9 @@ class Blockchain:
         if response.status_code == 400 or response.status_code == 500:
           # TODO
           print(f"Block declined by node {node}")
-          return False
+          # return False TODO - Should we return false?
+        elif response.status_code == 409:
+          self.resolve_conflicts = True  
 
       except requests.exceptions.ConnectionError:
         continue
