@@ -160,6 +160,7 @@
           <div class="col">
             <button class="btn btn-primary" @click="onLoadData">{{ view === 'chain' ? 'Load Blockchain' : 'Load Transactions' }}</button>
             <button v-if="view === 'chain' && wallet" class="btn btn-success" @click="onMine">Mine Coins</button>
+            <button class="btn btn-warning" @click="onResolve">Resolve Conflicts</button>
           </div>
         </div>
 
@@ -329,13 +330,25 @@
             });
           },
           onMine: function() {
-            var vm = this
+            var vm = this;
             
             axios.post("/mine").then(function(response) {
               vm.error = null;
               vm.success = response.data.data.message;
               console.log(response.data.data);
               vm.funds = response.data.data.funds;
+            }).catch(function (error) {
+              vm.success = null;
+              vm.error = error.response.data.error.message;
+            });
+          },
+          onResolve: function() {
+            var vm = this;
+
+            axios.post("/resolve-conflicts").then(function(response) {
+              vm.error = null;
+              vm.success = response.data.data.message;
+              console.log(response.data.data);
             }).catch(function (error) {
               vm.success = null;
               vm.error = error.response.data.error.message;
@@ -348,7 +361,7 @@
               this.dataLoading = true;
 
               axios.get('/chain').then(function(response) {
-                vm.blockchain = response.data;
+                vm.blockchain = response.data.data.blockchain;
                 vm.dataLoading = false;
               })
               .catch(function(error) {

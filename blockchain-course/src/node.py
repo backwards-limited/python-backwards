@@ -95,20 +95,21 @@ def add_transaction():
 
 @app.route("/mine", methods = ["POST"])
 def mine():
-  # if blockchain.resolve_conflicts:
-  #   return success
+  if blockchain.resolve_conflicts:
+    return fail(409, "Resolve conflicts first, block not added")
 
+  block_count_before_mine = len(blockchain.chain)
   block = blockchain.mine_block()
 
-  if block == None:
-    return fail(500, "Adding a block failed", {
-      "wallet-exists": wallet.public_key != None
-    })
-
-  else:
+  if len(blockchain.chain) > block_count_before_mine:
     return success(201, "Block added successfully", {
       "block": block.dict(),
       "funds": blockchain.get_balance(wallet.public_key)
+    })
+
+  else:
+    return fail(500, "Adding a block failed", {
+      "wallet-exists": wallet.public_key != None
     })
 
 @app.route("/block/broadcast", methods = ["POST"])
@@ -180,6 +181,13 @@ def nodes():
   return success(200, json = {
     "nodes": list(blockchain.peer_node_ips)
   })
+
+@app.route("/resolve-conflicts", methods = ["POST"])
+def resolve_conflicts():
+  if blockchain.resolve():
+    return success(200, "Chain was replaced")
+  else:
+    return success(200, "Local chain kept")
 
 def reset_blockchain(responseCode):
   global blockchain

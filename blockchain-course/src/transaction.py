@@ -12,6 +12,10 @@ class Transaction (Printable):
   def verify_transactions(transactions, get_balance):
     return all([tx.verify(get_balance(tx.sender), False) for tx in transactions])
 
+  @staticmethod
+  def parse_transaction_json(transaction):
+    return Transaction(transaction["sender"], transaction["recipient"], transaction["amount"], transaction["signature"])
+
   def __init__(self, sender, recipient, amount, signature):
     self.sender = sender
     self.recipient = recipient

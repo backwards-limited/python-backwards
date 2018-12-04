@@ -10,6 +10,24 @@ from pow import ProofOfWork as pow
 class Blockchain:
   mining_reward = 10
 
+  @staticmethod
+  def verify(chain):
+    for index, block in enumerate(chain):
+      if index == 0:
+        if str(block) != str(Block.genesis_block()):
+          return False
+      else:
+        if block.previous_hash != chain[index - 1].hash():
+          print("block.previous_hash = " + block.previous_hash)
+          print("self.chain[index - 1].hash() = " + chain[index - 1].hash())
+          return False
+
+        if not pow.valid_proof(block.previous_hash, block.transactions, block.proof):
+          print("Proof of Work invalid")
+          return False
+
+    return True
+
   def __init__(self, public_key, id = None):
     self.public_key = public_key
     self.peer_node_ips = set()
@@ -32,9 +50,6 @@ class Blockchain:
   def load_data(self):
     try:
       with open(self.file_name, mode = "r") as file:
-        def parse_transaction(transaction):
-          return Transaction(transaction["sender"], transaction["recipient"], transaction["amount"], transaction["signature"])
-
         def load_blockchain(loaded_blockchain):
           if len(loaded_blockchain) > 0:
             self.chain = []
@@ -44,7 +59,7 @@ class Blockchain:
                 Block(
                   block["index"],
                   block["previous_hash"],
-                  [parse_transaction(tx) for tx in block["transactions"]],
+                  [Transaction.parse_transaction_json(tx) for tx in block["transactions"]],
                   block["proof"],
                   block["timestamp"]
                 )
@@ -55,7 +70,7 @@ class Blockchain:
             self.open_transactions = []
 
             for tx in from_json(loaded_open_transactions):
-              self.open_transactions.append(parse_transaction(tx))
+              self.open_transactions.append(Transaction.parse_transaction_json(tx))
 
         def load_peer_node_ips(peer_node_ips):
           if len(peer_node_ips) > 0:
@@ -166,7 +181,7 @@ class Blockchain:
         if response.status_code == 400 or response.status_code == 500:
           # TODO
           print(f"Block declined by node {node}")
-          # return False TODO - Should we return false?
+          # return False #TODO - Should we return false?
         elif response.status_code == 409:
           self.resolve_conflicts = True  
 
@@ -174,6 +189,36 @@ class Blockchain:
         continue
 
     return True
+
+  def resolve(self):
+    def parse_transaction_json(block_json):
+      return [Transaction.parse_transaction_json(tx) for tx in block_json["transactions"]]
+
+    winning_chain = self.chain
+    replace = False
+
+    for node in self.peer_node_ips:
+      try:
+        response = requests.get(f"http://{node}/chain")
+
+        blockchain_json = response.json()["data"]["blockchain"]
+        node_chain = [Block(b["index"], b["previous-hash"], parse_transaction_json(b), b["proof"], b["timestamp"]) for b in blockchain_json]
+
+        if len(node_chain) > len(winning_chain) and Blockchain.verify(node_chain):
+          winning_chain = node_chain
+          replace = True
+
+      except requests.exceptions.ConnectionError:
+        continue
+
+    self.resolve_conflicts = False
+    self.chain = winning_chain
+
+    if replace:
+      self.open_transactions = []
+
+    self.save_data()
+    return replace
 
   def get_balance(self, sender):
     def amount(who):
@@ -230,21 +275,7 @@ class Blockchain:
 
   def verify_chain(self):
     """Verify the current blockchain, returning True if valid, otherwise False - Note we skip the first genesis entry"""
-    for index, block in enumerate(self.chain):
-      if index == 0:
-        if str(block) != str(Block.genesis_block()):
-          return False
-      else:
-        if block.previous_hash != self.chain[index - 1].hash():
-          print("block.previous_hash = " + block.previous_hash)
-          print("self.chain[index - 1].hash() = " + self.chain[index - 1].hash())
-          return False
-
-        if not pow.valid_proof(block.previous_hash, block.transactions, block.proof):
-          print("Proof of Work invalid")
-          return False
-
-    return True
+    return Blockchain.verify(self.chain)
 
   def add_peer_node(self, node_ip):
     """
